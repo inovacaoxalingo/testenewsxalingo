@@ -12,7 +12,6 @@
   html { scroll-behavior: smooth; }
   body { font-family: 'Quicksand', sans-serif; background: #e8e0d0; display: flex; min-height: 100vh; }
 
-  /* SIDEBAR */
   .sidebar { width: var(--sidebar-w); min-height: 100vh; background: var(--page-bg); position: fixed; top: 0; left: 0; bottom: 0; z-index: 40; display: flex; flex-direction: column; overflow-y: auto; border-right: 1px solid rgba(0,0,0,0.06); box-shadow: 2px 0 20px rgba(0,0,0,0.08); }
   .sidebar::-webkit-scrollbar { width: 4px; }
   .sidebar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 4px; }
@@ -43,533 +42,212 @@
   .sb-esportes .sb-cat-head { background: #efc68f; } .sb-esportes .sb-cat-bar { background: #f89e1c; } .sb-esportes .sb-cat-num,.sb-esportes .sb-cat-name,.sb-esportes .sb-cat-arrow { color: #8a5a0e; } .sb-esportes .sb-sub { color: #8a5a0e; } .sb-esportes .sb-sub-dot { background: #f89e1c; }
   .sb-playground .sb-cat-head { background: #c78c88; } .sb-playground .sb-cat-bar { background: #891434; } .sb-playground .sb-cat-num,.sb-playground .sb-cat-name,.sb-playground .sb-cat-arrow { color: #5e0e24; } .sb-playground .sb-sub { color: #5e0e24; } .sb-playground .sb-sub-dot { background: #891434; }
   .sb-ofertas .sb-cat-head { background: #f8c400; } .sb-ofertas .sb-cat-bar { background: #c8960a; } .sb-ofertas .sb-cat-num,.sb-ofertas .sb-cat-name,.sb-ofertas .sb-cat-arrow { color: #5a3d00; } .sb-ofertas .sb-sub { color: #5a3d00; } .sb-ofertas .sb-sub-dot { background: #c8960a; }
-  .sb-news .sb-cat-head { background: var(--accent); } .sb-news .sb-cat-bar { background: #378ADD; } .sb-news .sb-cat-num,.sb-news .sb-cat-name,.sb-news .sb-cat-arrow { color: #e6f1fb; } .sb-news .sb-sub { color: #e6f1fb; } .sb-news .sb-sub-dot { background: #378ADD; }
+  .sb-news .sb-cat-head { background: var(--accent); } .sb-news .sb-cat-bar { background: #378ADD; } .sb-news .sb-cat-num,.sb-news .sb-cat-name,.sb-news .sb-cat-arrow { color: #e6f1fb; }
+  .sb-news .sb-sub { color: var(--accent); font-weight: 700; }
+  .sb-news .sb-sub-dot { background: var(--accent); }
+  .sb-news .sb-sub:hover { background: rgba(27,58,92,0.08); }
 
   .sb-toggle { display: none; position: fixed; top: 14px; left: 14px; z-index: 60; width: 42px; height: 42px; background: rgba(27,58,92,0.92); color: white; border: 2px solid rgba(255,255,255,0.15); border-radius: 12px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,0.25); }
   .sb-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 35; }
 
-  /* MAIN */
-  .main { margin-left: var(--sidebar-w); flex: 1; padding: 32px 40px; min-width: 0; }
+  .main { margin-left: var(--sidebar-w); flex: 1; padding: 24px 32px; min-width: 0; }
+  .page-header { margin-bottom: 14px; }
+  .page-header-top { display: flex; align-items: center; gap: 10px; margin-bottom: 2px; }
+  .page-icon { width: 30px; height: 30px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .page-title { font-family: 'Fredoka', sans-serif; font-size: 22px; font-weight: 700; color: var(--accent); }
+  .page-sub { font-size: 11px; color: rgba(0,0,0,0.4); font-weight: 600; margin-left: 40px; }
 
-  /* PAGE HEADER */
-  .page-header { margin-bottom: 28px; }
-  .page-header-top { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
-  .page-icon { width: 36px; height: 36px; background: var(--accent); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .page-title { font-family: 'Fredoka', sans-serif; font-size: 28px; font-weight: 700; color: var(--accent); }
-  .page-sub { font-size: 13px; color: rgba(0,0,0,0.4); font-weight: 600; margin-left: 48px; }
-
-  /* SECTION LABEL */
-  .section-label { font-size: 10px; font-weight: 700; color: rgba(0,0,0,0.4); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; margin-top: 32px; display: flex; align-items: center; gap: 10px; }
+  .section-label { font-size: 9px; font-weight: 700; color: rgba(0,0,0,0.4); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; margin-top: 20px; display: flex; align-items: center; gap: 10px; }
   .section-label::after { content: ''; flex: 1; height: 1px; background: rgba(0,0,0,0.08); }
 
-  /* AVISOS */
-  .avisos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
-  .aviso-card { background: white; border-radius: 14px; padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; border: 0.5px solid rgba(0,0,0,0.08); border-left: 4px solid #ccc; transition: transform 0.2s, box-shadow 0.2s; }
-  .aviso-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
-  .aviso-card.urgente { border-left-color: var(--red); }
-  .aviso-card.info { border-left-color: var(--accent); }
-  .aviso-card.ok { border-left-color: var(--green); }
-  .aviso-card.aviso { border-left-color: var(--yellow); }
-  .aviso-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .aviso-card.urgente .aviso-icon { background: #FCEBEB; }
-  .aviso-card.info .aviso-icon { background: #E6F1FB; }
-  .aviso-card.ok .aviso-icon { background: #EAF3DE; }
-  .aviso-card.aviso .aviso-icon { background: #FAEEDA; }
-  .aviso-titulo { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
-  .aviso-texto { font-size: 12px; color: rgba(0,0,0,0.5); line-height: 1.55; }
-  .aviso-data { font-size: 10px; color: rgba(0,0,0,0.3); margin-top: 6px; font-weight: 600; }
+  .avisos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .aviso-card { background: white; border-radius: 10px; padding: 10px 12px; display: flex; gap: 8px; align-items: flex-start; border: 0.5px solid rgba(0,0,0,0.06); border-left: 3px solid #ccc; }
+  .aviso-card.urgente { border-left-color: var(--red); } .aviso-card.info { border-left-color: var(--accent); } .aviso-card.ok { border-left-color: var(--green); } .aviso-card.aviso { border-left-color: var(--yellow); }
+  .aviso-icon { width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .aviso-card.urgente .aviso-icon { background: #FCEBEB; } .aviso-card.info .aviso-icon { background: #E6F1FB; } .aviso-card.ok .aviso-icon { background: #EAF3DE; } .aviso-card.aviso .aviso-icon { background: #FAEEDA; }
+  .aviso-titulo { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 1px; }
+  .aviso-texto { font-size: 10px; color: rgba(0,0,0,0.42); line-height: 1.4; }
+  .aviso-data { font-size: 9px; color: rgba(0,0,0,0.22); margin-top: 2px; font-weight: 600; }
 
-  /* ===== VIDEOS & MEDIA ===== */
-  .media-section { margin-top: 8px; }
-
-  /* YouTube Principal */
-  .yt-featured { background: white; border-radius: 16px; overflow: hidden; border: 0.5px solid rgba(0,0,0,0.08); margin-bottom: 20px; }
-  .yt-featured .yt-embed { position: relative; width: 100%; padding-top: 56.25%; }
-  .yt-featured .yt-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-  .yt-featured .yt-info { padding: 16px 20px; }
-  .yt-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 6px; margin-bottom: 8px; }
-  .yt-badge.red { background: #FF0000; color: white; }
-  .yt-badge.dark { background: #010101; color: white; }
-  .yt-badge.insta { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
-  .yt-titulo { font-size: 14px; font-weight: 700; color: var(--accent); line-height: 1.4; margin-bottom: 6px; }
-  .yt-meta { font-size: 11px; color: rgba(0,0,0,0.4); display: flex; align-items: center; gap: 8px; }
-  .ext-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; font-size: 12px; font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
+  .media-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+  .yt-wrap { background: white; border-radius: 12px; overflow: hidden; border: 0.5px solid rgba(0,0,0,0.06); }
+  .yt-embed { position: relative; width: 100%; padding-top: 56.25%; }
+  .yt-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+  .yt-info { padding: 10px 14px; }
+  .yt-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 9px; font-weight: 800; padding: 2px 8px; border-radius: 5px; }
+  .yt-badge.red { background: #FF0000; color: white; } .yt-badge.dark { background: #010101; color: white; }
+  .yt-titulo { font-size: 12px; font-weight: 700; color: var(--accent); line-height: 1.3; margin-bottom: 2px; }
+  .yt-meta { font-size: 10px; color: rgba(0,0,0,0.35); }
+  .ext-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 6px; font-size: 11px; font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
   .ext-link:hover { opacity: 0.7; }
-  .ext-link svg { flex-shrink: 0; }
 
-  /* SHORTS GRID */
-  .shorts-label { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; margin-top: 24px; }
-  .shorts-label h3 { font-family: 'Fredoka', sans-serif; font-size: 15px; font-weight: 700; color: var(--accent); }
-  .shorts-label .pill { font-size: 9px; font-weight: 800; background: #FF0000; color: white; padding: 2px 8px; border-radius: 10px; letter-spacing: 0.5px; }
+  .v-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .v-card { background: white; border-radius: 10px; overflow: hidden; border: 0.5px solid rgba(0,0,0,0.06); transition: transform 0.2s; }
+  .v-card:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+  .v-card iframe { width: 100%; aspect-ratio: 9/16; border: none; display: block; }
+  .v-card-info { padding: 5px 8px; }
+  .v-card-title { font-size: 10px; font-weight: 700; color: var(--accent); line-height: 1.25; }
 
-  .shorts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
-  .short-card { background: white; border-radius: 14px; overflow: hidden; border: 0.5px solid rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s; }
-  .short-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-  .short-card iframe { width: 100%; aspect-ratio: 9/16; border: none; display: block; }
-  .short-card-info { padding: 10px 12px; }
-  .short-card-title { font-size: 11px; font-weight: 700; color: var(--accent); line-height: 1.35; }
+  .sub-label { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+  .sub-label h3 { font-family: 'Fredoka', sans-serif; font-size: 13px; font-weight: 700; color: var(--accent); }
+  .pill { font-size: 8px; font-weight: 800; padding: 2px 7px; border-radius: 8px; color: white; }
 
-  /* ===== INSTAGRAM SECTION ===== */
-  .insta-section { margin-top: 8px; }
-  .insta-header { background: white; border-radius: 16px; padding: 20px; border: 0.5px solid rgba(0,0,0,0.08); margin-bottom: 16px; display: flex; align-items: center; gap: 16px; }
-  .insta-avatar { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 3px; }
-  .insta-avatar-inner { width: 100%; height: 100%; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 20px; color: var(--accent); }
-  .insta-profile-info { flex: 1; }
-  .insta-profile-name { font-family: 'Fredoka', sans-serif; font-size: 16px; font-weight: 700; color: var(--accent); }
-  .insta-profile-handle { font-size: 12px; color: rgba(0,0,0,0.4); font-weight: 600; }
-  .insta-profile-bio { font-size: 12px; color: rgba(0,0,0,0.5); margin-top: 4px; line-height: 1.4; }
-  .insta-stats { display: flex; gap: 20px; flex-shrink: 0; }
-  .insta-stat { text-align: center; }
-  .insta-stat-num { font-family: 'Fredoka', sans-serif; font-size: 18px; font-weight: 700; color: var(--accent); }
-  .insta-stat-label { font-size: 10px; color: rgba(0,0,0,0.35); font-weight: 600; }
-  .insta-follow-btn { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; border: none; border-radius: 10px; padding: 9px 24px; font-size: 12px; font-weight: 800; font-family: inherit; cursor: pointer; flex-shrink: 0; transition: transform 0.15s, box-shadow 0.15s; text-decoration: none; display: inline-block; }
-  .insta-follow-btn:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(220,39,67,0.3); }
+  .insta-row { display: grid; grid-template-columns: 240px 1fr; gap: 16px; align-items: start; }
+  .insta-card { background: white; border-radius: 12px; padding: 14px; border: 0.5px solid rgba(0,0,0,0.06); text-align: center; position: relative; overflow: hidden; }
+  .insta-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 44px; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  .insta-avatar { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #f09433, #dc2743, #bc1888); display: flex; align-items: center; justify-content: center; margin: 16px auto 6px; position: relative; z-index: 1; padding: 3px; }
+  .insta-avatar-inner { width: 100%; height: 100%; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 16px; color: var(--accent); }
+  .insta-name { font-family: 'Fredoka', sans-serif; font-size: 13px; font-weight: 700; color: var(--accent); }
+  .insta-handle { font-size: 10px; color: rgba(0,0,0,0.35); margin-bottom: 6px; }
+  .insta-bio { font-size: 10px; color: rgba(0,0,0,0.45); margin-bottom: 8px; }
+  .insta-stats { display: flex; justify-content: center; gap: 16px; margin-bottom: 10px; }
+  .insta-sn { font-family: 'Fredoka', sans-serif; font-size: 14px; font-weight: 700; color: var(--accent); }
+  .insta-sl { font-size: 9px; color: rgba(0,0,0,0.3); font-weight: 600; }
+  .insta-btn { display: block; width: 100%; background: linear-gradient(135deg, #f09433, #dc2743, #bc1888); color: white; border: none; border-radius: 8px; padding: 7px; font-size: 11px; font-weight: 800; font-family: inherit; cursor: pointer; text-decoration: none; text-align: center; }
+  .insta-reels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .insta-dot { width: 6px; height: 6px; border-radius: 50%; background: linear-gradient(135deg, #f09433, #dc2743); flex-shrink: 0; }
 
-  .insta-reels-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
-  .insta-reel-card { background: white; border-radius: 14px; overflow: hidden; border: 0.5px solid rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s; }
-  .insta-reel-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-  .insta-reel-card iframe { width: 100%; aspect-ratio: 9/16; border: none; display: block; }
-  .insta-reel-info { padding: 10px 12px; display: flex; align-items: center; gap: 6px; }
-  .insta-reel-dot { width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, #f09433, #dc2743, #bc1888); flex-shrink: 0; }
-  .insta-reel-title { font-size: 11px; font-weight: 700; color: var(--accent); line-height: 1.35; }
-
-  /* TIKTOK */
-  .tt-wrap { background: white; border-radius: 16px; overflow: hidden; border: 0.5px solid rgba(0,0,0,0.08); padding: 20px; margin-top: 16px; }
+  .tt-wrap { background: white; border-radius: 12px; border: 0.5px solid rgba(0,0,0,0.06); padding: 14px; }
   .tt-embed { width: 100%; display: flex; justify-content: center; }
   .tt-embed blockquote { margin: 0 auto !important; }
 
-  /* ===== REDES SOCIAIS ===== */
-  .social-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-  .social-card { background: white; border-radius: 14px; padding: 20px 16px; border: 0.5px solid rgba(0,0,0,0.08); text-decoration: none; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
+  .social-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .social-card { background: white; border-radius: 10px; padding: 12px 10px; border: 0.5px solid rgba(0,0,0,0.06); text-decoration: none; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 5px; transition: transform 0.2s; position: relative; overflow: hidden; }
   .social-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-  .social-card.card-insta::before { background: linear-gradient(90deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-  .social-card.card-yt::before { background: #FF0000; }
-  .social-card.card-tt::before { background: #010101; }
-  .social-card.card-fb::before { background: #1877F2; }
-  .social-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-  .social-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+  .social-card.c-insta::before { background: linear-gradient(90deg, #f09433, #dc2743, #bc1888); }
+  .social-card.c-yt::before { background: #FF0000; } .social-card.c-tt::before { background: #010101; } .social-card.c-fb::before { background: #1877F2; }
+  .social-card:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+  .social-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
   .social-icon.insta { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-  .social-icon.yt { background: #FF0000; }
-  .social-icon.tt { background: #010101; }
-  .social-icon.fb { background: #1877F2; }
-  .social-nome { font-size: 13px; font-weight: 700; color: var(--accent); }
-  .social-handle { font-size: 11px; color: rgba(0,0,0,0.4); }
-  .social-seguidores { font-size: 20px; font-weight: 900; color: var(--accent); font-family: 'Fredoka', sans-serif; }
-  .social-seg-label { font-size: 10px; color: rgba(0,0,0,0.35); font-weight: 600; }
-  .social-btn { background: var(--accent); color: white; border: none; border-radius: 8px; padding: 7px 16px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit; width: 100%; transition: background 0.15s; }
-  .social-btn:hover { background: #293b7f; }
+  .social-icon.yt { background: #FF0000; } .social-icon.tt { background: #010101; } .social-icon.fb { background: #1877F2; }
+  .social-nome { font-size: 11px; font-weight: 700; color: var(--accent); }
+  .social-handle { font-size: 9px; color: rgba(0,0,0,0.3); }
+  .social-seguidores { font-size: 15px; font-weight: 900; color: var(--accent); font-family: 'Fredoka', sans-serif; }
+  .social-seg-label { font-size: 8px; color: rgba(0,0,0,0.28); font-weight: 600; }
+  .social-btn { background: var(--accent); color: white; border: none; border-radius: 6px; padding: 5px 12px; font-size: 10px; font-weight: 700; font-family: inherit; width: 100%; }
 
-  /* ===== MEDIA QUERIES ===== */
-  @media (max-width: 1100px) {
-    .shorts-grid, .insta-reels-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-    .social-cards { grid-template-columns: repeat(2, 1fr); }
-  }
+  @media (max-width: 1100px) { .media-row, .insta-row { grid-template-columns: 1fr; } }
   @media (max-width: 860px) {
     .sidebar { transform: translateX(-100%); transition: transform 0.35s ease; }
     .sidebar.open { transform: translateX(0); }
-    .sb-toggle { display: flex; }
-    .sb-overlay.open { display: block; }
-    .main { margin-left: 0; padding: 20px 16px; }
-    .shorts-grid, .insta-reels-grid { grid-template-columns: repeat(2, 1fr); }
-    .social-cards { grid-template-columns: 1fr 1fr; }
-    .insta-header { flex-wrap: wrap; }
-    .insta-stats { width: 100%; justify-content: space-around; }
-  }
-  @media (max-width: 480px) {
-    .shorts-grid, .insta-reels-grid { grid-template-columns: 1fr 1fr; }
-    .social-cards { grid-template-columns: 1fr; }
+    .sb-toggle { display: flex; } .sb-overlay.open { display: block; }
+    .main { margin-left: 0; padding: 16px; }
+    .avisos-grid, .social-cards { grid-template-columns: 1fr 1fr; }
+    .insta-reels-grid, .v-grid { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
 <body>
 
-<button class="sb-toggle" id="sbToggle" onclick="toggleSidebar()">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-</button>
+<button class="sb-toggle" id="sbToggle" onclick="toggleSidebar()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
 <div class="sb-overlay" id="sbOverlay" onclick="toggleSidebar()"></div>
 
 <aside class="sidebar" id="sidebar">
   <div class="sb-header">
     <img src="logo-xalingo.png" alt="Xalingo" class="sb-logo">
-    <a href="sumario.html" class="sb-back">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
-      Voltar ao Sumário
-    </a>
+    <a href="sumario.html" class="sb-back"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg> Voltar ao Sumário</a>
   </div>
   <nav class="sb-nav">
-    <div class="sb-cat sb-blocos" onclick="toggleCat(this)">
-      <div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">01</div><div class="sb-cat-name">Blocos de Montar</div><div class="sb-cat-arrow">&#9658;</div></div>
-      <div class="sb-subs">
-        <a class="sb-sub" href="blocos-de-montar.html#engenheiro"><span class="sb-sub-dot"></span>Brincando de Engenheiro<span class="sb-sub-page">07</span></a>
-        <a class="sb-sub" href="blocos-de-montar.html#blocos"><span class="sb-sub-dot"></span>Blocos de Montar<span class="sb-sub-page">16</span></a>
-        <a class="sb-sub" href="blocos-de-montar.html#grandes"><span class="sb-sub-dot"></span>Blocos Grandes<span class="sb-sub-page">61</span></a>
-        <a class="sb-sub" href="blocos-de-montar.html#soft"><span class="sb-sub-dot"></span>Blocos Soft<span class="sb-sub-page">70</span></a>
-      </div>
-    </div>
-    <div class="sb-cat sb-educ" onclick="toggleCat(this)">
-      <div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">02</div><div class="sb-cat-name">Educativos</div><div class="sb-cat-arrow">&#9658;</div></div>
-      <div class="sb-subs">
-        <a class="sb-sub" href="educativos.html#desenvolvimento"><span class="sb-sub-dot"></span>Desenvolvimento<span class="sb-sub-page">75</span></a>
-        <a class="sb-sub" href="educativos.html#steam"><span class="sb-sub-dot"></span>Steam<span class="sb-sub-page">86</span></a>
-        <a class="sb-sub" href="educativos.html#colorir"><span class="sb-sub-dot"></span>Quadros para Colorir<span class="sb-sub-page">91</span></a>
-        <a class="sb-sub" href="educativos.html#quebracabeca"><span class="sb-sub-dot"></span>Quebra-cabeca<span class="sb-sub-page">93</span></a>
-        <a class="sb-sub" href="educativos.html#memoria"><span class="sb-sub-dot"></span>Memoria<span class="sb-sub-page">99</span></a>
-        <a class="sb-sub" href="educativos.html#carimbos"><span class="sb-sub-dot"></span>Carimbos<span class="sb-sub-page">112</span></a>
-      </div>
-    </div>
-    <div class="sb-cat sb-jogos" onclick="toggleCat(this)">
-      <div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">03</div><div class="sb-cat-name">Jogos</div><div class="sb-cat-arrow">&#9658;</div></div>
-      <div class="sb-subs">
-        <a class="sb-sub" href="jogos.html#xadrez"><span class="sb-sub-dot"></span>Xadrez<span class="sb-sub-page">114</span></a>
-        <a class="sb-sub" href="jogos.html#classicos"><span class="sb-sub-dot"></span>Jogos Classicos<span class="sb-sub-page">118</span></a>
-        <a class="sb-sub" href="jogos.html#boardgames"><span class="sb-sub-dot"></span>Board Games<span class="sb-sub-page">126</span></a>
-      </div>
-    </div>
-    <div class="sb-cat sb-faz" onclick="toggleCat(this)">
-      <div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">04</div><div class="sb-cat-name">Faz de Conta</div><div class="sb-cat-arrow">&#9658;</div></div>
-      <div class="sb-subs">
-        <a class="sb-sub" href="faz-de-conta.html#cozinhas"><span class="sb-sub-dot"></span>Cozinhas<span class="sb-sub-page">130</span></a>
-        <a class="sb-sub" href="faz-de-conta.html#fazdeconta"><span class="sb-sub-dot"></span>Faz de Conta<span class="sb-sub-page">131</span></a>
-        <a class="sb-sub" href="faz-de-conta.html#agua"><span class="sb-sub-dot"></span>Brinquedos de Agua<span class="sb-sub-page">134</span></a>
-      </div>
-    </div>
-    <div class="sb-cat sb-rodados" onclick="toggleCat(this)">
-      <div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">05</div><div class="sb-cat-name">Rodados</div><div class="sb-cat-arrow">&#9658;</div></div>
-      <div class="sb-subs">
-        <a class="sb-sub" href="rodados.html#tric12"><span class="sb-sub-dot"></span>Triciclos 12 meses<span class="sb-sub-page">137</span></a>
-        <a class="sb-sub" href="rodados.html#tric24"><span class="sb-sub-dot"></span>Triciclos 24 meses<span class="sb-sub-page">138</span></a>
-      </div>
-    </div>
-    <div class="sb-cat sb-esportes" onclick="toggleCat(this)">
-      <div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">06</div><div class="sb-cat-name">Esportes</div><div class="sb-cat-arrow">&#9658;</div></div>
-      <div class="sb-subs">
-        <a class="sb-sub" href="esportes.html#basquete"><span class="sb-sub-dot"></span>Basquete<span class="sb-sub-page">144</span></a>
-        <a class="sb-sub" href="esportes.html#futebol"><span class="sb-sub-dot"></span>Futebol de Mesa<span class="sb-sub-page">146</span></a>
-        <a class="sb-sub" href="esportes.html#tenis"><span class="sb-sub-dot"></span>Tenis de Mesa<span class="sb-sub-page">147</span></a>
-      </div>
-    </div>
-    <div class="sb-cat sb-playground" onclick="toggleCat(this)">
-      <div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">07</div><div class="sb-cat-name">Playground</div><div class="sb-cat-arrow">&#9658;</div></div>
-      <div class="sb-subs">
-        <a class="sb-sub" href="playground.html#balancos"><span class="sb-sub-dot"></span>Balancoes<span class="sb-sub-page">149</span></a>
-        <a class="sb-sub" href="playground.html#gangorras"><span class="sb-sub-dot"></span>Gangorras<span class="sb-sub-page">150</span></a>
-        <a class="sb-sub" href="playground.html#escorregadores"><span class="sb-sub-dot"></span>Escorregadores<span class="sb-sub-page">156</span></a>
-        <a class="sb-sub" href="playground.html#casinhas"><span class="sb-sub-dot"></span>Casinhas<span class="sb-sub-page">158</span></a>
-        <a class="sb-sub" href="playground.html#outdoormenor"><span class="sb-sub-dot"></span>Outdoor Menor<span class="sb-sub-page">161</span></a>
-        <a class="sb-sub" href="playground.html#outdoormaior"><span class="sb-sub-dot"></span>Outdoor Maior<span class="sb-sub-page">165</span></a>
-      </div>
-    </div>
-    <div class="sb-cat sb-ofertas" onclick="toggleCat(this)">
-      <div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">08</div><div class="sb-cat-name">Ofertas</div><div class="sb-cat-arrow">&#9658;</div></div>
-      <div class="sb-subs">
-        <a class="sb-sub" href="ofertas.html"><span class="sb-sub-dot"></span>Vem Brincar 2026</a>
-      </div>
-    </div>
-    <div class="sb-cat sb-news active open">
-      <div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">09</div><div class="sb-cat-name">News</div><div class="sb-cat-arrow">&#9658;</div></div>
-      <div class="sb-subs">
-        <a class="sb-sub" href="#avisos"><span class="sb-sub-dot"></span>Avisos</a>
-        <a class="sb-sub" href="#midia"><span class="sb-sub-dot"></span>YouTube</a>
-        <a class="sb-sub" href="#instagram"><span class="sb-sub-dot"></span>Instagram</a>
-        <a class="sb-sub" href="#redes"><span class="sb-sub-dot"></span>Redes Sociais</a>
-      </div>
-    </div>
+    <div class="sb-cat sb-blocos" onclick="toggleCat(this)"><div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">01</div><div class="sb-cat-name">Blocos de Montar</div><div class="sb-cat-arrow">&#9658;</div></div><div class="sb-subs"><a class="sb-sub" href="blocos-de-montar.html#engenheiro"><span class="sb-sub-dot"></span>Brincando de Engenheiro<span class="sb-sub-page">07</span></a><a class="sb-sub" href="blocos-de-montar.html#blocos"><span class="sb-sub-dot"></span>Blocos de Montar<span class="sb-sub-page">16</span></a><a class="sb-sub" href="blocos-de-montar.html#grandes"><span class="sb-sub-dot"></span>Blocos Grandes<span class="sb-sub-page">61</span></a><a class="sb-sub" href="blocos-de-montar.html#soft"><span class="sb-sub-dot"></span>Blocos Soft<span class="sb-sub-page">70</span></a></div></div>
+    <div class="sb-cat sb-educ" onclick="toggleCat(this)"><div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">02</div><div class="sb-cat-name">Educativos</div><div class="sb-cat-arrow">&#9658;</div></div><div class="sb-subs"><a class="sb-sub" href="educativos.html#desenvolvimento"><span class="sb-sub-dot"></span>Desenvolvimento<span class="sb-sub-page">75</span></a><a class="sb-sub" href="educativos.html#steam"><span class="sb-sub-dot"></span>Steam<span class="sb-sub-page">86</span></a><a class="sb-sub" href="educativos.html#colorir"><span class="sb-sub-dot"></span>Quadros para Colorir<span class="sb-sub-page">91</span></a><a class="sb-sub" href="educativos.html#quebracabeca"><span class="sb-sub-dot"></span>Quebra-cabeça<span class="sb-sub-page">93</span></a><a class="sb-sub" href="educativos.html#memoria"><span class="sb-sub-dot"></span>Memória<span class="sb-sub-page">99</span></a><a class="sb-sub" href="educativos.html#carimbos"><span class="sb-sub-dot"></span>Carimbos<span class="sb-sub-page">112</span></a></div></div>
+    <div class="sb-cat sb-jogos" onclick="toggleCat(this)"><div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">03</div><div class="sb-cat-name">Jogos</div><div class="sb-cat-arrow">&#9658;</div></div><div class="sb-subs"><a class="sb-sub" href="jogos.html#xadrez"><span class="sb-sub-dot"></span>Xadrez<span class="sb-sub-page">114</span></a><a class="sb-sub" href="jogos.html#classicos"><span class="sb-sub-dot"></span>Jogos Clássicos<span class="sb-sub-page">118</span></a><a class="sb-sub" href="jogos.html#boardgames"><span class="sb-sub-dot"></span>Board Games<span class="sb-sub-page">126</span></a></div></div>
+    <div class="sb-cat sb-faz" onclick="toggleCat(this)"><div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">04</div><div class="sb-cat-name">Faz de Conta</div><div class="sb-cat-arrow">&#9658;</div></div><div class="sb-subs"><a class="sb-sub" href="faz-de-conta.html#cozinhas"><span class="sb-sub-dot"></span>Cozinhas<span class="sb-sub-page">130</span></a><a class="sb-sub" href="faz-de-conta.html#fazdeconta"><span class="sb-sub-dot"></span>Faz de Conta<span class="sb-sub-page">131</span></a><a class="sb-sub" href="faz-de-conta.html#agua"><span class="sb-sub-dot"></span>Brinquedos de Água<span class="sb-sub-page">134</span></a></div></div>
+    <div class="sb-cat sb-rodados" onclick="toggleCat(this)"><div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">05</div><div class="sb-cat-name">Rodados</div><div class="sb-cat-arrow">&#9658;</div></div><div class="sb-subs"><a class="sb-sub" href="rodados.html#tric12"><span class="sb-sub-dot"></span>Triciclos 12 meses<span class="sb-sub-page">137</span></a><a class="sb-sub" href="rodados.html#tric24"><span class="sb-sub-dot"></span>Triciclos 24 meses<span class="sb-sub-page">138</span></a></div></div>
+    <div class="sb-cat sb-esportes" onclick="toggleCat(this)"><div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">06</div><div class="sb-cat-name">Esportes</div><div class="sb-cat-arrow">&#9658;</div></div><div class="sb-subs"><a class="sb-sub" href="esportes.html#basquete"><span class="sb-sub-dot"></span>Basquete<span class="sb-sub-page">144</span></a><a class="sb-sub" href="esportes.html#futebol"><span class="sb-sub-dot"></span>Futebol de Mesa<span class="sb-sub-page">146</span></a><a class="sb-sub" href="esportes.html#tenis"><span class="sb-sub-dot"></span>Tênis de Mesa<span class="sb-sub-page">147</span></a></div></div>
+    <div class="sb-cat sb-playground" onclick="toggleCat(this)"><div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">07</div><div class="sb-cat-name">Playground</div><div class="sb-cat-arrow">&#9658;</div></div><div class="sb-subs"><a class="sb-sub" href="playground.html#balancos"><span class="sb-sub-dot"></span>Balanços<span class="sb-sub-page">149</span></a><a class="sb-sub" href="playground.html#gangorras"><span class="sb-sub-dot"></span>Gangorras<span class="sb-sub-page">150</span></a><a class="sb-sub" href="playground.html#escorregadores"><span class="sb-sub-dot"></span>Escorregadores<span class="sb-sub-page">156</span></a><a class="sb-sub" href="playground.html#casinhas"><span class="sb-sub-dot"></span>Casinhas<span class="sb-sub-page">158</span></a><a class="sb-sub" href="playground.html#outdoormenor"><span class="sb-sub-dot"></span>Outdoor Menor<span class="sb-sub-page">161</span></a><a class="sb-sub" href="playground.html#outdoormaior"><span class="sb-sub-dot"></span>Outdoor Maior<span class="sb-sub-page">165</span></a></div></div>
+    <div class="sb-cat sb-ofertas" onclick="toggleCat(this)"><div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">08</div><div class="sb-cat-name">Ofertas</div><div class="sb-cat-arrow">&#9658;</div></div><div class="sb-subs"><a class="sb-sub" href="ofertas.html"><span class="sb-sub-dot"></span>Vem Brincar 2026</a></div></div>
+    <div class="sb-cat sb-news active open"><div class="sb-cat-head"><div class="sb-cat-bar"></div><div class="sb-cat-num">09</div><div class="sb-cat-name">News</div><div class="sb-cat-arrow">&#9658;</div></div><div class="sb-subs"><a class="sb-sub" href="#avisos"><span class="sb-sub-dot"></span>Avisos</a><a class="sb-sub" href="#midia"><span class="sb-sub-dot"></span>YouTube</a><a class="sb-sub" href="#instagram"><span class="sb-sub-dot"></span>Instagram</a><a class="sb-sub" href="#redes"><span class="sb-sub-dot"></span>Redes Sociais</a></div></div>
   </nav>
 </aside>
 
 <main class="main">
-
   <div class="page-header">
     <div class="page-header-top">
-      <div class="page-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-      </div>
+      <div class="page-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
       <h1 class="page-title">News &amp; Comunicados</h1>
     </div>
     <p class="page-sub">Fique por dentro das novidades, avisos e conteúdos Xalingo</p>
   </div>
 
-  <!-- ==================== AVISOS ==================== -->
-  <span class="section-anchor" id="avisos"></span>
+  <!-- AVISOS -->
+  <span id="avisos"></span>
   <div class="section-label">Avisos e Informações Importantes</div>
   <div class="avisos-grid">
-
-    <div class="aviso-card urgente">
-      <div class="aviso-icon">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" stroke-width="2.5" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      </div>
-      <div>
-        <div class="aviso-titulo">Nova tabela de preços — Abril 2026</div>
-        <div class="aviso-texto">A nova tabela entra em vigor a partir de 01/04/2026. Consulte seu representante ou acesse o Drive interno.</div>
-        <div class="aviso-data">19 Mar 2026</div>
-      </div>
-    </div>
-
-    <div class="aviso-card info">
-      <div class="aviso-icon">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1B3A5C" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      </div>
-      <div>
-        <div class="aviso-titulo">Campanha Vem Brincar — até 31/03</div>
-        <div class="aviso-texto">Aproveite os descontos de até 62% em mais de 75 produtos. Acesse a aba Ofertas para montar seu pedido.</div>
-        <div class="aviso-data">01 Mar 2026</div>
-      </div>
-    </div>
-
-    <div class="aviso-card ok">
-      <div class="aviso-icon">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2ecc71" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-      </div>
-      <div>
-        <div class="aviso-titulo">Certificação Inmetro — Racing Car e Super Máquina</div>
-        <div class="aviso-texto">Linha Racing Car e Super Máquina na Pista aprovadas no Inmetro. Produtos liberados para venda em todo o Brasil.</div>
-        <div class="aviso-data">10 Mar 2026</div>
-      </div>
-    </div>
-
-    <div class="aviso-card aviso">
-      <div class="aviso-icon">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#BA7517" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      </div>
-      <div>
-        <div class="aviso-titulo">Catálogo 2026 disponível!</div>
-        <div class="aviso-texto">O catálogo digital 2026 está no ar com todas as verticais, novidades e produtos. Compartilhe com seus clientes!</div>
-        <div class="aviso-data">15 Fev 2026</div>
-      </div>
-    </div>
-
+    <div class="aviso-card urgente"><div class="aviso-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" stroke-width="2.5" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div><div class="aviso-titulo">Nova tabela de preços — Abril 2026</div><div class="aviso-texto">Nova tabela em vigor a partir de 01/04/2026. Consulte seu representante.</div><div class="aviso-data">19 Mar 2026</div></div></div>
+    <div class="aviso-card info"><div class="aviso-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1B3A5C" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div><div class="aviso-titulo">Campanha Vem Brincar — até 31/03</div><div class="aviso-texto">Descontos de até 62% em +75 produtos. Acesse a aba Ofertas.</div><div class="aviso-data">01 Mar 2026</div></div></div>
+    <div class="aviso-card ok"><div class="aviso-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2ecc71" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="aviso-titulo">Certificação Inmetro — Racing Car</div><div class="aviso-texto">Racing Car e Super Máquina aprovadas. Liberadas para venda.</div><div class="aviso-data">10 Mar 2026</div></div></div>
+    <div class="aviso-card aviso"><div class="aviso-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#BA7517" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div><div class="aviso-titulo">Catálogo 2026 disponível!</div><div class="aviso-texto">Catálogo digital 2026 no ar. Compartilhe com seus clientes!</div><div class="aviso-data">15 Fev 2026</div></div></div>
   </div>
 
-  <!-- ==================== YOUTUBE ==================== -->
-  <span class="section-anchor" id="midia"></span>
+  <!-- YOUTUBE + SHORTS -->
+  <span id="midia"></span>
   <div class="section-label">YouTube — Vídeos e Shorts</div>
-
-  <div class="media-section">
-    <!-- Video Principal -->
-    <div class="yt-featured">
-      <div class="yt-embed">
-        <iframe src="https://www.youtube-nocookie.com/embed/-qpAMmDb9t8?si=B70ysYPCv9fwRCkN"
-          title="Xalingo Brinquedos - YouTube"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen></iframe>
-      </div>
-      <div class="yt-info">
-        <div class="yt-badge red">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#FF0000"/></svg>
-          YouTube
+  <div class="media-row">
+    <div>
+      <div class="sub-label"><h3>Vídeo em Destaque</h3><span class="pill" style="background:#FF0000;">YOUTUBE</span></div>
+      <div class="yt-wrap">
+        <div class="yt-embed"><iframe src="https://www.youtube-nocookie.com/embed/-qpAMmDb9t8?si=B70ysYPCv9fwRCkN" title="Xalingo Brinquedos" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="yt-info">
+          <div class="yt-titulo">Xalingo Brinquedos — Lançamentos 2026</div>
+          <div class="yt-meta">Canal oficial Xalingo Brinquedos</div>
+          <a class="ext-link" style="color:#FF0000;" href="https://www.youtube.com/@XalingoBrinquedosOficial" target="_blank">Ver canal no YouTube <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         </div>
-        <div class="yt-titulo">Xalingo Brinquedos — Lançamentos e Novidades 2026</div>
-        <div class="yt-meta">Canal oficial Xalingo Brinquedos</div>
-        <a class="ext-link" style="color: #FF0000;" href="https://www.youtube.com/@xalingobrinquedos" target="_blank">
-          Ver canal no YouTube
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>
       </div>
     </div>
-
-    <!-- YouTube Shorts -->
-    <div class="shorts-label">
-      <h3>Shorts</h3>
-      <span class="pill">NOVO</span>
-    </div>
-    <div class="shorts-grid">
-      <div class="short-card">
-        <iframe src="https://www.youtube-nocookie.com/embed/FnW3nPAD7xM"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
-        <div class="short-card-info">
-          <div class="short-card-title">Mapa do Mundo — Blocos Criativos</div>
-        </div>
+    <div>
+      <div class="sub-label"><h3>Shorts</h3><span class="pill" style="background:#FF0000;">NOVO</span></div>
+      <div class="v-grid">
+        <div class="v-card"><iframe src="https://www.youtube-nocookie.com/embed/FnW3nPAD7xM" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><div class="v-card-info"><div class="v-card-title">Mapa do Mundo — Blocos Criativos</div></div></div>
+        <!-- Adicione mais shorts copiando o bloco acima e trocando o ID -->
       </div>
-      <!-- Adicione mais shorts abaixo copiando o bloco acima e trocando o ID do vídeo -->
-      <!--
-      <div class="short-card">
-        <iframe src="https://www.youtube-nocookie.com/embed/ID_DO_VIDEO"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
-        <div class="short-card-info">
-          <div class="short-card-title">Título do Short</div>
-        </div>
-      </div>
-      -->
     </div>
   </div>
 
-  <!-- ==================== INSTAGRAM ==================== -->
-  <span class="section-anchor" id="instagram"></span>
+  <!-- INSTAGRAM -->
+  <span id="instagram"></span>
   <div class="section-label">Instagram — @xalingobrinquedos</div>
-
-  <div class="insta-section">
-    <!-- Perfil Header -->
-    <div class="insta-header">
-      <div class="insta-avatar">
-        <div class="insta-avatar-inner">X</div>
-      </div>
-      <div class="insta-profile-info">
-        <div class="insta-profile-name">Xalingo Brinquedos</div>
-        <div class="insta-profile-handle">@xalingobrinquedos</div>
-        <div class="insta-profile-bio">Mais do que brincar. Vem conhecer a gente!</div>
-      </div>
-      <div class="insta-stats">
-        <div class="insta-stat">
-          <div class="insta-stat-num">42K</div>
-          <div class="insta-stat-label">seguidores</div>
-        </div>
-        <div class="insta-stat">
-          <div class="insta-stat-num">2,1K</div>
-          <div class="insta-stat-label">posts</div>
-        </div>
-      </div>
-      <a class="insta-follow-btn" href="https://www.instagram.com/xalingobrinquedos/" target="_blank">Seguir</a>
+  <div class="insta-row">
+    <div class="insta-card">
+      <div class="insta-avatar"><div class="insta-avatar-inner">X</div></div>
+      <div class="insta-name">Xalingo Brinquedos</div>
+      <div class="insta-handle">@xalingobrinquedos</div>
+      <div class="insta-bio">Mais do que brincar. Vem conhecer a gente!</div>
+      <div class="insta-stats"><div><div class="insta-sn">42K</div><div class="insta-sl">seguidores</div></div><div><div class="insta-sn">2,1K</div><div class="insta-sl">posts</div></div><div><div class="insta-sn">265</div><div class="insta-sl">seguindo</div></div></div>
+      <a class="insta-btn" href="https://www.instagram.com/xalingobrinquedos/" target="_blank">Seguir no Instagram</a>
     </div>
-
-    <!-- Reels do Instagram -->
-    <div class="shorts-label">
-      <h3>Reels em Destaque</h3>
-      <span class="pill" style="background: linear-gradient(135deg, #f09433, #dc2743, #bc1888);">INSTA</span>
-    </div>
-    <div class="insta-reels-grid">
-      <!-- Reel 1: Brincando de Engenheiro -->
-      <div class="insta-reel-card">
-        <iframe src="https://www.instagram.com/reel/DFiPyaeRd9x/embed/" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <div class="insta-reel-info">
-          <div class="insta-reel-dot"></div>
-          <div class="insta-reel-title">Brincando de Engenheiro</div>
-        </div>
+    <div>
+      <div class="sub-label"><h3>Reels em Destaque</h3><span class="pill" style="background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);">REELS</span></div>
+      <div class="insta-reels-grid">
+        <div class="v-card"><iframe src="https://www.instagram.com/reel/DFiPyaeRd9x/embed/" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><div class="v-card-info" style="display:flex;align-items:center;gap:4px;"><div class="insta-dot"></div><div class="v-card-title">Brincando de Engenheiro</div></div></div>
+        <div class="v-card"><iframe src="https://www.instagram.com/reel/C77cK7vMW8p/embed/" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><div class="v-card-info" style="display:flex;align-items:center;gap:4px;"><div class="insta-dot"></div><div class="v-card-title">Linha Desenvolvimento</div></div></div>
+        <div class="v-card"><iframe src="https://www.instagram.com/reel/C7uhm64Rm7q/embed/" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><div class="v-card-info" style="display:flex;align-items:center;gap:4px;"><div class="insta-dot"></div><div class="v-card-title">De 1 em 1 — Gaúcha</div></div></div>
       </div>
-      <!-- Reel 2: Linha Desenvolvimento -->
-      <div class="insta-reel-card">
-        <iframe src="https://www.instagram.com/reel/C77cK7vMW8p/embed/" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <div class="insta-reel-info">
-          <div class="insta-reel-dot"></div>
-          <div class="insta-reel-title">Linha Desenvolvimento</div>
-        </div>
-      </div>
-      <!-- Reel 3 -->
-      <div class="insta-reel-card">
-        <iframe src="https://www.instagram.com/reel/C7uhm64Rm7q/embed/" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <div class="insta-reel-info">
-          <div class="insta-reel-dot"></div>
-          <div class="insta-reel-title">De 1 em 1 — Empresa Gaúcha</div>
-        </div>
-      </div>
-      <!-- Para adicionar mais reels: copie o bloco acima e troque a URL do reel -->
-    </div>
-
-    <div style="text-align: center; margin-top: 16px;">
-      <a class="ext-link" style="color: #dc2743; font-size: 13px;" href="https://www.instagram.com/xalingobrinquedos/" target="_blank">
-        Ver mais no Instagram
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
     </div>
   </div>
 
-  <!-- ==================== TIKTOK ==================== -->
+  <!-- TIKTOK -->
   <div class="section-label">TikTok — @xalingobrinquedos</div>
   <div class="tt-wrap">
-    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
-      <div class="yt-badge dark">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.74a4.85 4.85 0 01-1.01-.05z"/></svg>
-        TikTok
-      </div>
-      <span style="font-size: 12px; color: rgba(0,0,0,0.4); font-weight: 600;">Mundo Dinos Xalingo</span>
-    </div>
-    <div class="tt-embed">
-      <blockquote class="tiktok-embed"
-        cite="https://www.tiktok.com/@xalingobrinquedos/video/7571502365346483474"
-        data-video-id="7571502365346483474"
-        style="max-width: 100%; min-width: 280px;">
-        <section>
-          <a target="_blank" title="@xalingobrinquedos" href="https://www.tiktok.com/@xalingobrinquedos?refer=embed">@xalingobrinquedos</a>
-          <p>Mundo Dinos Xalingo — Blocos grandes para montar, criar pistas e soltar bolinhas!</p>
-          <a target="_blank" title="som original - Xalingo Brinquedos" href="https://www.tiktok.com/music/som-original-Xalingo-Brinquedos-7571502393494407944?refer=embed">♬ som original - Xalingo Brinquedos</a>
-        </section>
-      </blockquote>
-    </div>
-    <div style="text-align: center; margin-top: 12px;">
-      <a class="ext-link" style="color: #010101;" href="https://www.tiktok.com/@xalingobrinquedos" target="_blank">
-        Ver perfil no TikTok
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-    </div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;"><div class="yt-badge dark"><svg width="10" height="10" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.74a4.85 4.85 0 01-1.01-.05z"/></svg> TikTok</div><span style="font-size:10px;color:rgba(0,0,0,0.35);font-weight:600;">Mundo Dinos Xalingo</span></div>
+    <div class="tt-embed"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@xalingobrinquedos/video/7571502365346483474" data-video-id="7571502365346483474" style="max-width:100%;min-width:280px;"><section><a target="_blank" href="https://www.tiktok.com/@xalingobrinquedos?refer=embed">@xalingobrinquedos</a><p>Mundo Dinos Xalingo</p></section></blockquote></div>
+    <div style="text-align:center;margin-top:8px;"><a class="ext-link" style="color:#010101;" href="https://www.tiktok.com/@xalingobrinquedos" target="_blank">Ver perfil no TikTok <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>
   </div>
 
-  <!-- ==================== REDES SOCIAIS ==================== -->
-  <span class="section-anchor" id="redes"></span>
+  <!-- REDES SOCIAIS -->
+  <span id="redes"></span>
   <div class="section-label">Siga a Xalingo</div>
   <div class="social-cards">
-
-    <a class="social-card card-insta" href="https://www.instagram.com/xalingobrinquedos/" target="_blank">
-      <div class="social-icon insta">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="white" stroke="none"/></svg>
-      </div>
-      <div>
-        <div class="social-nome">Instagram</div>
-        <div class="social-handle">@xalingobrinquedos</div>
-      </div>
-      <div>
-        <div class="social-seguidores">42K</div>
-        <div class="social-seg-label">seguidores</div>
-      </div>
-      <div class="social-btn" style="background: linear-gradient(135deg, #f09433, #dc2743, #bc1888);">Seguir</div>
-    </a>
-
-    <a class="social-card card-yt" href="https://www.youtube.com/@xalingobrinquedos" target="_blank">
-      <div class="social-icon yt">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98" fill="#FF0000"/></svg>
-      </div>
-      <div>
-        <div class="social-nome">YouTube</div>
-        <div class="social-handle">@xalingobrinquedos</div>
-      </div>
-      <div>
-        <div class="social-seguidores">Ver</div>
-        <div class="social-seg-label">canal</div>
-      </div>
-      <div class="social-btn" style="background: #FF0000;">Inscrever-se</div>
-    </a>
-
-    <a class="social-card card-tt" href="https://www.tiktok.com/@xalingobrinquedos" target="_blank">
-      <div class="social-icon tt">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.74a4.85 4.85 0 01-1.01-.05z"/></svg>
-      </div>
-      <div>
-        <div class="social-nome">TikTok</div>
-        <div class="social-handle">@xalingobrinquedos</div>
-      </div>
-      <div>
-        <div class="social-seguidores">Ver</div>
-        <div class="social-seg-label">perfil</div>
-      </div>
-      <div class="social-btn" style="background: #010101;">Seguir</div>
-    </a>
-
-    <a class="social-card card-fb" href="https://www.facebook.com/xalingo/" target="_blank">
-      <div class="social-icon fb">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-      </div>
-      <div>
-        <div class="social-nome">Facebook</div>
-        <div class="social-handle">@xalingo</div>
-      </div>
-      <div>
-        <div class="social-seguidores">212K</div>
-        <div class="social-seg-label">curtidas</div>
-      </div>
-      <div class="social-btn" style="background: #1877F2;">Curtir</div>
-    </a>
-
+    <a class="social-card c-insta" href="https://www.instagram.com/xalingobrinquedos/" target="_blank"><div class="social-icon insta"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="white" stroke="none"/></svg></div><div><div class="social-nome">Instagram</div><div class="social-handle">@xalingobrinquedos</div></div><div><div class="social-seguidores">42K</div><div class="social-seg-label">seguidores</div></div><div class="social-btn" style="background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);">Seguir</div></a>
+    <a class="social-card c-yt" href="https://www.youtube.com/@XalingoBrinquedosOficial" target="_blank"><div class="social-icon yt"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98" fill="#FF0000"/></svg></div><div><div class="social-nome">YouTube</div><div class="social-handle">@XalingoBrinquedosOficial</div></div><div><div class="social-seguidores">Ver</div><div class="social-seg-label">canal</div></div><div class="social-btn" style="background:#FF0000;">Inscrever-se</div></a>
+    <a class="social-card c-tt" href="https://www.tiktok.com/@xalingobrinquedos" target="_blank"><div class="social-icon tt"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.74a4.85 4.85 0 01-1.01-.05z"/></svg></div><div><div class="social-nome">TikTok</div><div class="social-handle">@xalingobrinquedos</div></div><div><div class="social-seguidores">Ver</div><div class="social-seg-label">perfil</div></div><div class="social-btn" style="background:#010101;">Seguir</div></a>
+    <a class="social-card c-fb" href="https://www.facebook.com/xalingo/" target="_blank"><div class="social-icon fb"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></div><div><div class="social-nome">Facebook</div><div class="social-handle">@xalingo</div></div><div><div class="social-seguidores">212K</div><div class="social-seg-label">curtidas</div></div><div class="social-btn" style="background:#1877F2;">Curtir</div></a>
   </div>
-
 </main>
 
 <script async src="https://www.tiktok.com/embed.js"></script>
 <script>
-  function toggleCat(el) { if (event && event.target.closest(".sb-sub")) return; el.classList.toggle("open"); }
-  function toggleSidebar() { document.getElementById("sidebar").classList.toggle("open"); document.getElementById("sbOverlay").classList.toggle("open"); }
+  function toggleCat(el){if(event&&event.target.closest(".sb-sub"))return;el.classList.toggle("open");}
+  function toggleSidebar(){document.getElementById("sidebar").classList.toggle("open");document.getElementById("sbOverlay").classList.toggle("open");}
 </script>
 </body>
 </html>
