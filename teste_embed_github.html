@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Teste Embed YouTube - GitHub Pages</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #111;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        h1 { color: #e94560; margin-bottom: 8px; font-size: 1.4rem; }
+        p.info { color: #888; margin-bottom: 32px; font-size: 0.9rem; }
+        .status {
+            background: #1a2a1a;
+            border: 1px solid #2d5a2d;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 32px;
+            font-size: 0.85rem;
+            color: #6fc66f;
+        }
+        .videos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+        }
+        .video-card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+        .video-card h3 { font-size: 0.85rem; color: #aaa; margin-bottom: 12px; }
+        iframe { border: none; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+    <h1>Teste Embed YouTube no GitHub Pages</h1>
+    <p class="info">Se os vídeos aparecerem abaixo, está funcionando!</p>
+
+    <div class="status" id="status">
+        Protocolo: <strong id="proto"></strong> |
+        Host: <strong id="host"></strong> |
+        Resultado esperado: <strong id="result"></strong>
+    </div>
+
+    <div class="videos">
+        <!-- Formato vertical (Shorts) -->
+        <div class="video-card">
+            <h3>Short Vertical (315×560)</h3>
+            <iframe
+                width="315"
+                height="560"
+                src="https://www.youtube-nocookie.com/embed/FnW3nPAD7xM"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Formato menor pra catálogo -->
+        <div class="video-card">
+            <h3>Tamanho catálogo (250×445)</h3>
+            <iframe
+                width="250"
+                height="445"
+                src="https://www.youtube-nocookie.com/embed/FnW3nPAD7xM"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+    <script>
+        const proto = location.protocol;
+        const host = location.hostname || 'arquivo local';
+        document.getElementById('proto').textContent = proto;
+        document.getElementById('host').textContent = host;
+        document.getElementById('result').textContent =
+            proto === 'file:' ? 'VAI DAR ERRO 153 (file://)' : 'DEVE FUNCIONAR!';
+        document.getElementById('status').style.borderColor =
+            proto === 'file:' ? '#5a2d2d' : '#2d5a2d';
+        document.getElementById('status').style.background =
+            proto === 'file:' ? '#1a1212' : '#1a2a1a';
+        document.getElementById('status').style.color =
+            proto === 'file:' ? '#c66f6f' : '#6fc66f';
+    </script>
+
+</body>
+</html>
