@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Teste de Imagens — Xalingo OneWeb</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f0f0f0; padding: 24px; }
+  h2 { color: #1B3A5C; margin-bottom: 6px; }
+  p.info { color: #666; font-size: 0.85rem; margin-bottom: 24px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 12px; }
+  .card {
+    background: #fff; border-radius: 10px; padding: 10px;
+    width: 140px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  .card img {
+    width: 110px; height: 110px; object-fit: contain;
+    background: #f8f8f8; border-radius: 6px;
+  }
+  .card .ref { font-size: 0.7rem; font-weight: 700; color: #1B3A5C; }
+  .card .nome { font-size: 0.62rem; color: #555; text-align: center; line-height: 1.3; }
+  .card .status { font-size: 0.65rem; font-weight: 700; }
+  .status.ok    { color: #2a7a2a; }
+  .status.erro  { color: #b00; }
+  .status.wait  { color: #c07000; }
+  #resumo { margin: 20px 0 10px; font-weight: 700; font-size: 0.9rem; color: #333; }
+</style>
+</head>
+<body>
+
+<h2>🧪 Teste de Carregamento de Imagens — OneWeb Xalingo</h2>
+<p class="info">
+  Este teste busca a primeira imagem de cada página de produto.<br>
+  <strong>Verde</strong> = imagem encontrada e carregada &nbsp;|&nbsp;
+  <strong>Vermelho</strong> = falha (CORS, página não encontrada, etc.) &nbsp;|&nbsp;
+  <strong>Amarelo</strong> = aguardando
+</p>
+
+<div id="resumo">⏳ Carregando…</div>
+<div class="grid" id="grid"></div>
+
+<script>
+const produtos = [
+  { ref:'20509', nome:'ENGENHEIRO 20 PÇS',     url:'https://produtosxalingo.oneweb.com.br/2026/03/20/2050-9-brincando-de-engenheiro-20-pcs/' },
+  { ref:'52754', nome:'ENGENHEIRO N1 42 PÇS',   url:'https://produtosxalingo.oneweb.com.br/2023/01/20/brincando-de-engenheiro-i/' },
+  { ref:'17921', nome:'BL CRIATIVOS MONTANHA',  url:'https://produtosxalingo.oneweb.com.br/2026/02/19/bl-criativos-montanha-russa/' },
+  { ref:'17910', nome:'BL CRIATIVOS PIRATA',    url:'https://produtosxalingo.oneweb.com.br/2026/02/18/bl-criativos-acessorios-pirata/' },
+  { ref:'16910', nome:'RACING CAR DISPLAY 4UN', url:'https://produtosxalingo.oneweb.com.br/2026/02/19/bl-racing-car-carro-de-corrida-display-4-un/' },
+  { ref:'17887', nome:'SPORT CAR 415 PÇS',      url:'https://produtosxalingo.oneweb.com.br/2026/02/19/bl-super-maquina-na-pista-sport-car-415-pcs/' },
+  { ref:'16954', nome:'FLOR DOS SONHOS',         url:'https://produtosxalingo.oneweb.com.br/2026/02/19/12022/' },
+  { ref:'28543', nome:'MUNDO ENC. FLORES',       url:'https://produtosxalingo.oneweb.com.br/2023/01/25/blocos-de-montar-mundo-encantado-flores-display-62-198-pecas/' },
+  { ref:'68421', nome:'BL GRANDES MESA',         url:'https://produtosxalingo.oneweb.com.br/2024/01/17/bloco-grande-mesa-interativa/' },
+  { ref:'63109', nome:'SUPER SOFT 22 PÇS',       url:'https://produtosxalingo.oneweb.com.br/2024/10/08/super-soft-blocos-22-pecas/' },
+];
+
+const grid = document.getElementById('grid');
+const resumo = document.getElementById('resumo');
+
+// Cria os cards imediatamente com status "aguardando"
+const cards = produtos.map(p => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <img id="img-${p.ref}" src="" alt="${p.nome}">
+    <div class="ref">REF ${p.ref}</div>
+    <div class="nome">${p.nome}</div>
+    <div class="status wait" id="st-${p.ref}">⏳ aguardando</div>
+  `;
+  grid.appendChild(card);
+  return p;
+});
+
+function extractImage(html) {
+  // 1. og:image
+  let m = html.match(/property=["']og:image["'][^>]+content=["']([^"']+)["']/);
+  if (!m) m = html.match(/content=["']([^"']+)["'][^>]+property=["']og:image["']/);
+  if (m) return m[1];
+  // 2. primeira imagem de wp-content/uploads que não seja logo/fundo/banner
+  const all = [...html.matchAll(/src=["'](https?:\/\/[^"']*wp-content\/uploads\/[^"']+\.(?:jpg|jpeg|png|webp))["']/gi)];
+  const filtered = all.map(x => x[1]).filter(s => !/logo|fundo|banner/i.test(s));
+  return filtered[0] || null;
+}
+
+let ok = 0, erro = 0;
+
+async function loadProduct(p) {
+  const img = document.getElementById(`img-${p.ref}`);
+  const st  = document.getElementById(`st-${p.ref}`);
+  try {
+    const res = await fetch(p.url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const html = await res.text();
+    const src = extractImage(html);
+    if (src) {
+      img.src = src;
+      img.onload = () => { st.className='status ok'; st.textContent='✅ ok'; ok++; atualiza(); };
+      img.onerror = () => { st.className='status erro'; st.textContent='❌ img inválida'; erro++; atualiza(); };
+    } else {
+      st.className='status erro'; st.textContent='❌ img não encontrada'; erro++; atualiza();
+    }
+  } catch(e) {
+    st.className='status erro'; st.textContent=`❌ ${e.message}`; erro++; atualiza();
+  }
+}
+
+function atualiza() {
+  const total = produtos.length;
+  const feito = ok + erro;
+  if (feito === total) {
+    resumo.textContent = `Resultado: ${ok} de ${total} imagens carregadas com sucesso${erro>0?' — '+erro+' falharam':' 🎉'}`;
+    resumo.style.color = erro > 0 ? '#b00' : '#2a7a2a';
+  } else {
+    resumo.textContent = `⏳ Carregando… ${feito}/${total}`;
+  }
+}
+
+// Carrega todos em paralelo
+Promise.all(produtos.map(loadProduct));
+</script>
+</body>
+</html>
