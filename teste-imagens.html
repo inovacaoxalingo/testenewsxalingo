@@ -17,12 +17,12 @@
     width: 110px; height: 110px; object-fit: contain;
     background: #f8f8f8; border-radius: 6px;
   }
-  .card .ref { font-size: 0.7rem; font-weight: 700; color: #1B3A5C; }
+  .card .ref  { font-size: 0.7rem; font-weight: 700; color: #1B3A5C; }
   .card .nome { font-size: 0.62rem; color: #555; text-align: center; line-height: 1.3; }
   .card .status { font-size: 0.65rem; font-weight: 700; }
-  .status.ok    { color: #2a7a2a; }
-  .status.erro  { color: #b00; }
-  .status.wait  { color: #c07000; }
+  .status.ok   { color: #2a7a2a; }
+  .status.erro { color: #b00; }
+  .status.wait { color: #c07000; }
   #resumo { margin: 20px 0 10px; font-weight: 700; font-size: 0.9rem; color: #333; }
 </style>
 </head>
@@ -30,16 +30,18 @@
 
 <h2>🧪 Teste de Carregamento de Imagens — OneWeb Xalingo</h2>
 <p class="info">
-  Este teste busca a primeira imagem de cada página de produto.<br>
-  <strong>Verde</strong> = imagem encontrada e carregada &nbsp;|&nbsp;
-  <strong>Vermelho</strong> = falha (CORS, página não encontrada, etc.) &nbsp;|&nbsp;
-  <strong>Amarelo</strong> = aguardando
+  Busca a primeira imagem de cada página via proxy CORS (allorigins.win).<br>
+  <strong style="color:green">Verde</strong> = carregada &nbsp;|&nbsp;
+  <strong style="color:red">Vermelho</strong> = falha &nbsp;|&nbsp;
+  <strong style="color:#c07000">Amarelo</strong> = aguardando
 </p>
 
 <div id="resumo">⏳ Carregando…</div>
 <div class="grid" id="grid"></div>
 
 <script>
+const PROXY = 'https://api.allorigins.win/get?url=';
+
 const produtos = [
   { ref:'20509', nome:'ENGENHEIRO 20 PÇS',     url:'https://produtosxalingo.oneweb.com.br/2026/03/20/2050-9-brincando-de-engenheiro-20-pcs/' },
   { ref:'52754', nome:'ENGENHEIRO N1 42 PÇS',   url:'https://produtosxalingo.oneweb.com.br/2023/01/20/brincando-de-engenheiro-i/' },
@@ -55,9 +57,9 @@ const produtos = [
 
 const grid = document.getElementById('grid');
 const resumo = document.getElementById('resumo');
+let ok = 0, erro = 0;
 
-// Cria os cards imediatamente com status "aguardando"
-const cards = produtos.map(p => {
+produtos.forEach(p => {
   const card = document.createElement('div');
   card.className = 'card';
   card.innerHTML = `
@@ -67,54 +69,46 @@ const cards = produtos.map(p => {
     <div class="status wait" id="st-${p.ref}">⏳ aguardando</div>
   `;
   grid.appendChild(card);
-  return p;
 });
 
 function extractImage(html) {
-  // 1. og:image
   let m = html.match(/property=["']og:image["'][^>]+content=["']([^"']+)["']/);
   if (!m) m = html.match(/content=["']([^"']+)["'][^>]+property=["']og:image["']/);
   if (m) return m[1];
-  // 2. primeira imagem de wp-content/uploads que não seja logo/fundo/banner
   const all = [...html.matchAll(/src=["'](https?:\/\/[^"']*wp-content\/uploads\/[^"']+\.(?:jpg|jpeg|png|webp))["']/gi)];
-  const filtered = all.map(x => x[1]).filter(s => !/logo|fundo|banner/i.test(s));
-  return filtered[0] || null;
-}
-
-let ok = 0, erro = 0;
-
-async function loadProduct(p) {
-  const img = document.getElementById(`img-${p.ref}`);
-  const st  = document.getElementById(`st-${p.ref}`);
-  try {
-    const res = await fetch(p.url);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const html = await res.text();
-    const src = extractImage(html);
-    if (src) {
-      img.src = src;
-      img.onload = () => { st.className='status ok'; st.textContent='✅ ok'; ok++; atualiza(); };
-      img.onerror = () => { st.className='status erro'; st.textContent='❌ img inválida'; erro++; atualiza(); };
-    } else {
-      st.className='status erro'; st.textContent='❌ img não encontrada'; erro++; atualiza();
-    }
-  } catch(e) {
-    st.className='status erro'; st.textContent=`❌ ${e.message}`; erro++; atualiza();
-  }
+  const f = all.map(x => x[1]).filter(s => !/logo|fundo|banner/i.test(s));
+  return f[0] || null;
 }
 
 function atualiza() {
-  const total = produtos.length;
-  const feito = ok + erro;
+  const total = produtos.length, feito = ok + erro;
   if (feito === total) {
-    resumo.textContent = `Resultado: ${ok} de ${total} imagens carregadas com sucesso${erro>0?' — '+erro+' falharam':' 🎉'}`;
+    resumo.textContent = `Resultado: ${ok} de ${total} imagens carregadas${erro > 0 ? ' — ' + erro + ' falharam' : ' 🎉'}`;
     resumo.style.color = erro > 0 ? '#b00' : '#2a7a2a';
   } else {
     resumo.textContent = `⏳ Carregando… ${feito}/${total}`;
   }
 }
 
-// Carrega todos em paralelo
+async function loadProduct(p) {
+  const img = document.getElementById('img-' + p.ref);
+  const st  = document.getElementById('st-'  + p.ref);
+  try {
+    const res  = await fetch(PROXY + encodeURIComponent(p.url));
+    const json = await res.json();
+    const src  = extractImage(json.contents || '');
+    if (src) {
+      img.src     = src;
+      img.onload  = () => { st.className='status ok';   st.textContent='✅ ok';          ok++;   atualiza(); };
+      img.onerror = () => { st.className='status erro'; st.textContent='❌ img inválida'; erro++; atualiza(); };
+    } else {
+      st.className='status erro'; st.textContent='❌ img não encontrada'; erro++; atualiza();
+    }
+  } catch(e) {
+    st.className='status erro'; st.textContent='❌ ' + e.message; erro++; atualiza();
+  }
+}
+
 Promise.all(produtos.map(loadProduct));
 </script>
 </body>
